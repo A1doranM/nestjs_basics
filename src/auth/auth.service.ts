@@ -1,18 +1,16 @@
-import {Injectable} from '@nestjs/common';
-import {PrismaService} from "../dal/prisma/prisma.service";
+import {Injectable} from "@nestjs/common";
 import {CreateUserDto} from "./dtos/create-user.dto";
+import {UsersService} from "../util-modules/users/users.service";
+import {User} from "@prisma/client";
 
 @Injectable()
 export class AuthService {
-    constructor(private repo: PrismaService) {
+    constructor(
+        private usersService: UsersService) {
     }
 
-    async create(user: CreateUserDto) {
-        const newUser = await this.repo.user.create({
-            data: {
-                email: user.email
-            }
-        })
+    async create(user: CreateUserDto): Promise<User> {
+        const newUser = await this.usersService.create(user);
 
         return newUser;
     }
