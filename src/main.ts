@@ -9,7 +9,9 @@ async function bootstrap() {
         new FastifyAdapter()
     );
     app.useGlobalPipes(
-        new ValidationPipe()
+        new ValidationPipe({
+            whitelist: true
+        })
     );
     await app.listen(3000);
 }

@@ -1,4 +1,12 @@
-import { Controller } from '@nestjs/common';
+import {Controller, Get} from '@nestjs/common';
+import { User } from '@prisma/client';
 
 @Controller('users')
-export class UsersController {}
+export class UsersController {
+
+    @Get()
+    signup(user: User) {
+
+    }
+
+}
