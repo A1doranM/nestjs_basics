@@ -1,6 +1,5 @@
 import {
     Body,
-    ClassSerializerInterceptor,
     Controller,
     Delete,
     Get,
@@ -8,15 +7,17 @@ import {
     Param,
     Patch,
     Post,
-    Query, UseInterceptors
+    Query,
 } from "@nestjs/common";
 import {CreateUserDto} from "./dtos/create-user.dto";
 import {AuthService} from "./auth.service";
 import {UsersService} from "../util-modules/users/users.service";
 import {UpdateUserDto} from "./dtos/update-user.dto";
-import {SerializeInterceptor} from "../interceptors/serialize.interceptor";
+import {UserDto} from "./dtos/user.dto";
+import {Serialize} from "../interceptors/serialize.interceptor";
 
 @Controller("auth")
+@Serialize(UserDto)
 export class AuthController {
     private service: AuthService = null;
     private usersService: UsersService = null;
@@ -32,7 +33,6 @@ export class AuthController {
         return JSON.stringify(newUser);
     }
 
-    @UseInterceptors(SerializeInterceptor)
     @Get("/:id")
     async findUser(@Param("id") id: string) {
         const user = await this.usersService.findById(parseInt(id, 10));
