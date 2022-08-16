@@ -8,10 +8,10 @@ export class UsersService {
     constructor(private repo: PrismaService) {
     }
 
-    async create(user: CreateUserDto): Promise<User> {
+    async create(email: string, password: string): Promise<User> {
         const newUser = await this.repo.user.create({
             data: {
-                email: user.email
+                email: email
             }
         });
 
