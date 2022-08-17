@@ -11,7 +11,8 @@ export class UsersService {
     async create(email: string, password: string): Promise<User> {
         const newUser = await this.repo.user.create({
             data: {
-                email: email
+                email: email,
+                password: password
             }
         });
 
@@ -26,8 +27,8 @@ export class UsersService {
         });
     }
 
-    async findByEmail(email: string): Promise<Array<User>> {
-        return await this.repo.user.findMany({
+    async findByEmail(email: string): Promise<User> {
+        return await this.repo.user.findUnique({
             where: {
                 email: email
             }

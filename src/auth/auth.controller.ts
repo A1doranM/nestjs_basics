@@ -1,29 +1,23 @@
 import {
     Body,
     Controller,
-    Delete,
     Get,
-    NotFoundException,
     Param,
-    Patch,
-    Post,
-    Query,
+    Post, Req,
+    Session,
 } from "@nestjs/common";
 import {CreateUserDto} from "./dtos/create-user.dto";
 import {AuthService} from "./auth.service";
-import {UsersService} from "../util-modules/users/users.service";
-import {UpdateUserDto} from "./dtos/update-user.dto";
 import {UserDto} from "./dtos/user.dto";
 import {Serialize} from "../interceptors/serialize.interceptor";
+import {FastifyRequest} from "fastify";
 
 @Controller("auth")
 @Serialize(UserDto)
 export class AuthController {
     private authService: AuthService = null;
-    private usersService: UsersService = null;
 
-    constructor(authService: AuthService, usersService: UsersService) {
-        this.usersService = usersService;
+    constructor(authService: AuthService) {
         this.authService = authService;
     }
 
@@ -40,6 +34,18 @@ export class AuthController {
         console.log("createUser: ", newUser);
         return JSON.stringify(newUser);
     }
+
+    @Get("/colors/:color")
+    setColor(@Param("color") color: string, @Req() request: FastifyRequest) {
+        console.log("Color: ", color, request["session"]);
+        request["session"].set("color", color);
+    }
+
+    @Get("/colors")
+    getColor(@Req() request: FastifyRequest) {
+        return request["session"].get("color");
+    }
+
     //
     // @Get("/:id")
     // async findUser(@Param("id") id: string) {

@@ -8,7 +8,6 @@ import {CryptoService} from "../util-modules/crypto/crypto.service";
 
 const scrypt = promisify(_scrypt);
 
-
 @Injectable()
 export class AuthService {
     constructor(
@@ -30,6 +29,17 @@ export class AuthService {
     }
 
     async signin(user: CreateUserDto): Promise<User> {
-        return null;
+        const foundUser = await this.usersService.findByEmail(user.email);
+        if(!foundUser) {
+            throw new BadRequestException("User does not exist.");
+        }
+
+        const isPasswordValid = this.cryptoService.verify(user.password, foundUser.password);
+
+        if(!isPasswordValid) {
+            throw new BadRequestException("Invalid password.");
+        }
+
+        return foundUser;
     }
 }
