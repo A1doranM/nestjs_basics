@@ -20,11 +20,15 @@ export class UsersService {
     }
 
     async findById(id: number): Promise<User> {
-        return await this.repo.user.findFirst({
+        const user = await this.repo.user.findFirst({
             where: {
                 id: id
             }
         });
+
+        if (!user) return null;
+
+        return user;
     }
 
     async findByEmail(email: string): Promise<User> {

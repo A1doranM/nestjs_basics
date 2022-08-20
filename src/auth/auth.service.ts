@@ -42,4 +42,8 @@ export class AuthService {
 
         return foundUser;
     }
+
+    async getCurrentUser(userId: number) {
+        return await this.usersService.findById(userId);
+    }
 }
