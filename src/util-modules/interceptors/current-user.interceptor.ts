@@ -1,7 +1,4 @@
-import {Injectable, NestInterceptor, ExecutionContext, CallHandler, UseInterceptors} from "@nestjs/common";
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
-import {plainToInstance} from "class-transformer";
+import {Injectable, NestInterceptor, ExecutionContext, CallHandler} from "@nestjs/common";
 import {UsersService} from "../users/users.service";
 
 @Injectable()
