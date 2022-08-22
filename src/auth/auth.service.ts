@@ -2,11 +2,7 @@ import {BadRequestException, Injectable} from "@nestjs/common";
 import {CreateUserDto} from "./dtos/create-user.dto";
 import {UsersService} from "../util-modules/users/users.service";
 import {User} from "@prisma/client";
-import {randomBytes, scrypt as _scrypt} from "crypto";
-import {promisify} from "util";
 import {CryptoService} from "../util-modules/crypto/crypto.service";
-
-const scrypt = promisify(_scrypt);
 
 @Injectable()
 export class AuthService {
