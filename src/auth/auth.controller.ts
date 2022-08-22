@@ -2,14 +2,12 @@ import {
     Body,
     Controller,
     Get,
-    Param,
-    Post, Req, UseGuards
+    Post, UseGuards
 } from "@nestjs/common";
 import {CreateUserDto} from "./dtos/create-user.dto";
 import {AuthService} from "./auth.service";
 import {UserDto} from "./dtos/user.dto";
-import {Serialize} from "../interceptors/serialize.interceptor";
-import {FastifyRequest} from "fastify";
+import {Serialize} from "../util-modules/interceptors/serialize.interceptor";
 import {Session} from "../util-modules/decorators/session.decorator";
 import {CurrentUser} from "../util-modules/decorators/current-user.decorator";
 import {AuthGuard} from "./guards/auth.guard";
@@ -45,7 +43,7 @@ export class AuthController {
 
     @Get("whoami")
     @UseGuards(AuthGuard)
-    whoAmI(@CurrentUser() user: string, @Session() session: any) {
+    whoAmI(@CurrentUser() user: string) {
         return user;
     }
 
