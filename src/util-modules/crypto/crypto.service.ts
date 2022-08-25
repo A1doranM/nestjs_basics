@@ -1,10 +1,9 @@
 import {Injectable} from "@nestjs/common";
-import {PrismaService} from "../../dal/prisma/prisma.service";
 import {randomBytes, scrypt} from "node:crypto";
 
 @Injectable()
 export class CryptoService {
-    constructor(private repo: PrismaService) {
+    constructor() {
     }
 
     public async hash(password: string): Promise<string> {

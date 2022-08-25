@@ -39,7 +39,7 @@ export class AuthService {
         return foundUser;
     }
 
-    async getCurrentUser(userId: number) {
+    async getCurrentUser(userId: number): Promise<User> {
         return await this.usersService.findById(userId);
     }
 }
