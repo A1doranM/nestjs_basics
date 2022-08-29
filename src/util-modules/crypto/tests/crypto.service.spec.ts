@@ -1,7 +1,6 @@
-import {Test} from "@nestjs/testing";
+import {Test} from "@nestjs/testing"
 import {User} from "@prisma/client";
 import {CryptoService} from "../crypto.service";
-import {log} from "util";
 
 
 
@@ -24,6 +23,8 @@ describe("Testing Auth Service", () => {
     });
 
     test("Password hash", async () => {
-        expect(service.hash("ProgerNum1")).toBeDefined();
+        const password = "ProgerNum1"
+        const hashedPassword = await service.hash(password);
+        expect(await service.verify(password, hashedPassword)).toBe(true);
     });
 });

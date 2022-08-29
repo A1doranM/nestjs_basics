@@ -55,9 +55,12 @@ describe("Testing Auth Service", () => {
 
     test("Signin user", async () => {
         const user = await service.signin({
-            email: "@asd.com",
+            email: "aldoran.ua@gmail.com",
             password: "1q2w3e4r"
         });
+
+        console.log('User: ', user);
+
         expect(service).toBeDefined();
     });
 
