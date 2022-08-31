@@ -59,7 +59,7 @@ describe("Testing Auth Service", () => {
             password: "1q2w3e4r"
         });
 
-        console.log('User: ', user);
+        console.log("User: ", user);
 
         expect(service).toBeDefined();
     });
