@@ -26,3 +26,14 @@ model Post {
   author    User?    @relation(fields: [authorId], references: [id])
   authorId  Int?
 }
+
+model Reports {
+    id: Unt @default(autoincrement()) @id
+    price: Int
+    make: Int
+    model: String
+    year: Int
+    lng: Int
+    lat: Int
+    mileage: String
+}
