@@ -24,14 +24,14 @@ export class AuthController {
     @Post("/signup")
     async signup(@Body() user: CreateUserDto, @Session() session: any) {
         const newUser = await this.authService.signup(user);
-        session.userId = newUser.id;
+        session.set("userId", newUser.id);
         return JSON.stringify(newUser);
     }
 
     @Post("/signin")
     async signin(@Body() user: CreateUserDto, @Session() session: any) {
         const signedInUser = await this.authService.signin(user);
-        session.userId = signedInUser.id;
+        session.set("userId", signedInUser.id);
         return JSON.stringify(signedInUser);
     }
 

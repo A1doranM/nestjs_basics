@@ -28,12 +28,12 @@ model Post {
 }
 
 model Reports {
-    id: Unt @default(autoincrement()) @id
-    price: Int
-    make: Int
-    model: String
-    year: Int
-    lng: Int
-    lat: Int
-    mileage: String
+    id      Int @default(autoincrement()) @id
+    price   Int
+    make    String
+    model   String
+    year    Int
+    lng     Int
+    lat     Int
+    mileage Int
 }
